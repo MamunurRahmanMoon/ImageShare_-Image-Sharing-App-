@@ -158,27 +158,29 @@
     button:hover {
       background: #26a9e0;
     }
-
-    .footer {
-      background-color: black;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .footer h5 {
-      margin: 0;
-    }
   </style>
+
+  {% block content %}
 </head>
+
+{% if messages %}
+{% for message in messages %}
+
+<h1 {% if message.tags %} class="{{message.tags}}" {% endif %}>
+  {{message}}
+</h1>
+{% endfor %}
+{% endif %}
+
 
 <body>
   <div class="main-block">
     <h1>Photo Share</h1>
     <form enctype="multipart/form-data" action="" method="POST">
 
-      {% csrf_token %} <!-- Cross Site Request Forgery -->
+      <h1>Welcome {{username}}</h1>
 
+      {% csrf_token %} <!-- Cross Site Request Forgery -->
       <hr><br><br>
       <input type="file" name="img" id="img" required />
       <br><br>
@@ -193,9 +195,7 @@
       </h5>
     </div>
   </div>
-  <div class="footer">
-    <h5>Your Footer Text</h5>
-  </div>
 </body>
+{% endblock content %}
 
 </html>
